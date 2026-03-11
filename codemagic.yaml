@@ -1,0 +1,17 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    max_build_duration: 120
+    instance_type: mac_mini_m2
+    scripts:
+      - name: Initialize Flutter Project
+        script: | 
+          flutter create .
+      - name: Get Flutter packages
+        script: | 
+          flutter packages pub get
+      - name: Build IPA
+        script: | 
+          flutter build ipa --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
