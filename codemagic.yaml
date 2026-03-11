@@ -4,9 +4,10 @@ workflows:
     max_build_duration: 120
     instance_type: mac_mini_m2
     scripts:
-      - name: Initialize Project
+      - name: Force Create iOS Folder
         script: | 
-          flutter create .
+          # This forces Flutter to build the skeleton properly
+          flutter create --platforms=ios .
       - name: Get Packages
         script: | 
           flutter pub get
@@ -15,6 +16,7 @@ workflows:
           flutter pub run flutter_launcher_icons
       - name: Build IPA
         script: | 
+          # We tell it exactly where to find the project now
           flutter build ipa --release --no-codesign
     artifacts:
       - build/ios/ipa/*.ipa
