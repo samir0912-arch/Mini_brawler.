@@ -1,15 +1,18 @@
 workflows:
   ios-workflow:
-    name: iOS Build
+    name: Game by Samir iOS Build
     max_build_duration: 120
     instance_type: mac_mini_m2
     scripts:
-      - name: Initialize Flutter Project
+      - name: Initialize Project
         script: | 
           flutter create .
-      - name: Get Flutter packages
+      - name: Get Packages
         script: | 
-          flutter packages pub get
+          flutter pub get
+      - name: Generate App Icons
+        script: | 
+          flutter pub run flutter_launcher_icons
       - name: Build IPA
         script: | 
           flutter build ipa --release --no-codesign
